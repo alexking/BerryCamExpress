@@ -60,15 +60,15 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 10px 0;
-  font-weight: 700;
+  font-weight: 400;
   color:#222222;
-  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+  font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
   letter-spacing: -1px;
 }
 
 h1 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 h2 {
@@ -264,7 +264,7 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
+  max-width: 768px;
   padding: 20px 10px;
   margin: 0 auto;
 }
@@ -277,7 +277,7 @@ Full-Width Styles
   z-index: 10;
   padding: 10px 50px 10px 10px;
   color: #fff;
-  background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
+  background: url('../images/blacktocat.png') #9a9a9a no-repeat 95% 50%;
   font-weight: 700;
   box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
@@ -285,71 +285,148 @@ Full-Width Styles
 }
 
 #header_wrap {
-  background: #212121;
-  background: -moz-linear-gradient(top, #373737, #212121);
-  background: -webkit-linear-gradient(top, #373737, #212121);
-  background: -ms-linear-gradient(top, #373737, #212121);
-  background: -o-linear-gradient(top, #373737, #212121);
-  background: linear-gradient(top, #373737, #212121);
+  background: #8c1c57; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhjMWM1NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzZjBiMzgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #8c1c57 0%, #3f0b38 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c1c57), color-stop(100%,#3f0b38)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #8c1c57 0%,#3f0b38 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #8c1c57 0%,#3f0b38 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #8c1c57 0%,#3f0b38 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #8c1c57 0%,#3f0b38 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c1c57', endColorstr='#3f0b38',GradientType=0 ); /* IE6-8 */
 }
 
 #header_wrap .inner {
-  padding: 50px 10px 30px 10px;
+  padding: 80px 10px 0px 10px;
+  text-align: center;
 }
 
 #project_title {
   margin: 0;
   color: #fff;
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 200;
   text-shadow: #111 0px 0px 10px;
 }
 
 #project_tagline {
   color: #fff;
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 21px;
+  font-weight: 200;
+  letter-spacing: 0.01em;
   background: none;
   text-shadow: #111 0px 0px 10px;
 }
 
+#app-image {
+  display: inline-block; 
+  width: 100%; 
+  height: 500px; 
+  background: url('../images/tablets-themes-github.png') no-repeat 0% 90%;
+  background-size: cover;
+}
+
+#app-icon {
+  display: inline-block; 
+  background: url('../images/app-icon.png') no-repeat 0% 90%;
+  width: 140px; 
+  height: 140px; 
+  float: right; 
+  margin-left: 20px;
+  margin-top: 10px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
 #downloads {
-  position: absolute;
-  width: 210px;
+  display: inline-block;
+  width: 420px;
   z-index: 10;
-  bottom: -40px;
   right: 0;
-  height: 70px;
-  background: url('../images/icon_download.png') no-repeat 0% 90%;
+  height: 60px;
+  color: #fff;
+  font-size: 16px;
+}
+
+#downloads a {
+  color: #fff;
+  text-align: center;
+}
+
+#downloads a i {
+  margin-right: 6px;
+}
+
+#downloads a:hover {
+  color: #8c1c57;
+  text-decoration: none;
+}
+
+#footer-downloads {
+  height: 60px;
+  text-align: center;
+  color: #333;
+}
+
+#footer-downloads a {
+  color: #333;
+  text-align: center;
+}
+
+#footer-downloads a i {
+  margin-right: 6px;
+}
+
+#footer-downloads a:hover {
+  color: #8c1c57;
+  text-decoration: none;
+}
+
+.main-section {
+  width: 420px;
+  text-align: center;
+  margin: 0 auto;
+  color: #333;
 }
 
 .zip_download_link {
   display: block;
   float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
-  overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom left;
+  width: 120px;
+  border: 1px solid #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-left: 10px;
 }
 
 .tar_download_link {
   display: block;
   float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
-  overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom right;
-  margin-left: 10px;
+  width: 120px;
+  border: 1px solid #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
-.zip_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top left;
-}
-
+.zip_download_link:hover,
 .tar_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top right;
+  background: #fff;
+  color: #000;
+}
+
+#footer-downloads .zip_download_link,
+#footer-downloads .tar_download_link {
+  border: 1px solid #333;
+}
+
+#footer-downloads .zip_download_link:hover,
+#footer-downloads .tar_download_link:hover {
+  background: #333;
+  color: #fff;
 }
 
 #main_content_wrap {
@@ -363,7 +440,13 @@ Full-Width Styles
 }
 
 #footer_wrap {
-  background: #212121;
+  background: #555;
+  font-size: 15px;
+  padding-bottom: 30px;
+}
+
+#footer_wrap .social-icons {
+  font-size: 20px;
 }
 
 
@@ -377,7 +460,17 @@ Small Device Styles
     font-size:14px;
   }
 
+  #header_wrap .inner {
+    padding: 50px 10px 10px 10px;
+    text-align: left;
+  }
+
   #downloads {
+    display: none;
+  }
+
+  #app-image,
+  #app-icon {
     display: none;
   }
 
@@ -388,6 +481,14 @@ Small Device Styles
 
   #project_title {
   font-size: 32px;
+  }
+
+  #project_tagline {
+    font-size: 20px;
+  }
+
+  #footer-downloads {
+    display: none;
   }
 
   h1 {
@@ -416,7 +517,7 @@ Small Device Styles
 
   code, pre {
     min-width: 320px;
-    max-width: 480px;
+    max-width: 340px;
     font-size: 11px;
   }
 
