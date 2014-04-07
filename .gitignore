@@ -5,6 +5,5 @@ temp/
 .idea
 bin/
 dist/
-_SpecRunner.html
 app/berrycamimages
 app/berrycamimages~
