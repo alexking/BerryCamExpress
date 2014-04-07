@@ -471,7 +471,7 @@ Full-Width Styles
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  border: 1px solid #ACACAC;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
 
 .other-operating-systems {
@@ -481,7 +481,7 @@ Full-Width Styles
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  border: 1px solid #ACACAC;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
 
 .mobile-devices ul,
