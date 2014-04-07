@@ -1,0 +1,188 @@
+body.very-berry {
+	
+	@very-berry:  #4E0027;
+	background: darken(@very-berry, 5%);
+
+	background: #5b0c3d; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #5b0c3d 0%, #140009 100%); 
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#5b0c3d), color-stop(100%,#140009)); 
+	background: -webkit-radial-gradient(center, ellipse cover,  #5b0c3d 0%,#140009 100%); 
+	background: -o-radial-gradient(center, ellipse cover,  #5b0c3d 0%,#140009 100%); 
+	background: -ms-radial-gradient(center, ellipse cover,  #5b0c3d 0%,#140009 100%); 
+	background: radial-gradient(ellipse at center,  #5b0c3d 0%,#140009 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5b0c3d', endColorstr='#140009',GradientType=1 );
+
+	.small-button,
+	.large-button,
+	.output-folder {
+		background: (@very-berry + #101010);
+	}
+
+	.modal-content {
+		background: #590d33; /* Old browsers */
+		background: -moz-radial-gradient(center, ellipse cover,  #590d33 1%, #300620 100%); 
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#590d33), color-stop(100%,#300620));
+		background: -webkit-radial-gradient(center, ellipse cover,  #590d33 1%,#300620 100%); 
+		background: -o-radial-gradient(center, ellipse cover,  #590d33 1%,#300620 100%); 
+		background: -ms-radial-gradient(center, ellipse cover,  #590d33 1%,#300620 100%); 
+		background: radial-gradient(ellipse at center,  #590d33 1%,#300620 100%); 
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#590d33', endColorstr='#300620',GradientType=1 ); 
+	}
+
+	.panel,
+	.timelapse-settings-inputs {
+		background: darken(@very-berry , 11%);
+	}
+
+	.panel-header {
+		color: lighten(@very-berry , 50%);
+	}
+
+	.slider-selection {
+		background: lighten(@very-berry , 50%);
+		color: @button-color;
+	}
+
+	.btn-default.selected,
+	.list-group-item.selected {
+		background: lighten(@very-berry , 20%);
+		color: @button-color;
+	}
+
+}
+
+body.snow {
+	
+	@snow:  #FEFEFE;
+	background: @snow;
+	color: #454545;
+
+	.small-button,
+	.large-button,
+	.output-folder {
+		background: (@snow + #111);
+		color: #000000;
+		opacity: 0.3;
+		text-style: italic;
+	}
+
+	.modal-content {
+		background: @snow;
+		color: #454545;
+	}
+
+	.panel,
+	.timelapse-settings-inputs {
+		background: #D6EAD6;
+	}
+
+	.panel-header,
+	.panel-values-upper, .panel-values-bottom,
+	.panel-values-lower, .timelapse-interval, .timelapse-separator {
+		color: #454545;
+	}
+
+	.panel-values-upper, .panel-values-bottom {
+		font-weight: bolder;
+	}
+
+	.slider-track {
+		background: #CACACA;
+	}
+
+	.slider-selection {
+		background: #454545;
+		color: @button-color;
+	}
+
+	.btn-primary,
+	.btn-default {
+		border: 1px solid #454545;
+		color: #454545;
+		opacity: 1;
+		-webkit-box-shadow: 0px 0px 0px 0px rgba(200, 200, 200, 0.2);
+		-moz-box-shadow:    0px 0px 0px 0px rgba(200, 200, 200, 0.2);
+		box-shadow:         0px 0px 0px 0px rgba(200, 200, 200, 0.2);
+		&.output-folder {
+			border: 1px solid #FFFFFF;
+			color: #454545;
+			opacity: 0.3;
+			-webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.77);
+			-moz-box-shadow:    0px 0px 15px 0px rgba(0, 0, 0, 0.77);
+			box-shadow:         0px 0px 15px 0px rgba(0, 0, 0, 0.77);
+		}
+	}
+
+	.output-folder
+	
+	.list-group-item {
+		color: #454545;
+	}
+	
+	.btn-default.selected,
+	.list-group-item.selected {
+		background: #454545;
+		color: white;
+	}
+
+	.timelapse-mode {
+		color: #454545;
+	}
+
+}
+
+body.retro {
+	
+	@snow:  #FEFEFE;
+	background: url('../images/leather.jpg');
+	background-size: cover;
+
+	color: #454545;
+
+	.small-button,
+	.large-button,
+	.output-folder {
+		
+		color: #333333;
+		background: url('../images/steel.jpg');
+		background-size: cover;
+		text-style: italic;
+
+		-webkit-box-shadow: inset 2px 2px 0px 0px rgba(255, 255, 255, 0.55);
+		-moz-box-shadow:    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.55);
+		box-shadow:         inset 2px 2px 0px 0px rgba(255, 255, 255, 0.55);
+
+	}
+
+	.panel,
+	.timelapse-settings-inputs {
+		background: #111111;
+		-webkit-box-shadow: 5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+		-moz-box-shadow:    5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+		box-shadow:         5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+	}
+
+	.panel-header,
+	.panel-values-upper, .panel-values-bottom,
+	.panel-values-lower, .timelapse-interval, .timelapse-separator {
+		color: #FF0042;
+	}
+
+	.list-group-item.selected,
+	.slider-selection {
+		background: #FF0042;
+		color: white;
+	}
+
+	.btn-default.selected {
+		background: #FF0042;
+		color: white;
+	}
+
+	.image-preview {
+		-webkit-box-shadow: 5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+		-moz-box-shadow:    5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+		box-shadow:         5px 5px 3px 0px rgba(200, 200, 200, 0.2);
+	}
+
+}

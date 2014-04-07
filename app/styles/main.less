@@ -1,0 +1,46 @@
+@import '../bower_components/bootstrap/less/bootstrap.less';
+@import "../vendor/slider.less";
+@import 'colours.less';
+@import 'berrycam.less';
+@import 'themes.less';
+@import 'icons.less';
+@import 'responsive.less';
+
+@baseBorderRadius: 50%;
+@baseLineHeight: 40px;
+
+.border-radius {
+  border-radius: @baseBorderRadius;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.list-group-item {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+/* Space out content a bit */
+body {
+    padding: 20px 0px 20px 0px;
+    background-color: @main-background;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (max-width: 320px) {
+
+}

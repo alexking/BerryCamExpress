@@ -1,0 +1,10 @@
+node_modules/
+temp/
+.tmp
+.grunt
+.idea
+bin/
+dist/
+_SpecRunner.html
+app/berrycamimages
+app/berrycamimages~

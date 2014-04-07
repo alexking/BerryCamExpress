@@ -1,0 +1,14 @@
+{
+  "name": "amplify",
+  "homepage": "https://github.com/appendto/amplify",
+  "version": "1.1.2",
+  "_release": "1.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.2",
+    "commit": "4645dc39798c3a36941c53d93557a9db46ac9eed"
+  },
+  "_source": "git://github.com/appendto/amplify.git",
+  "_target": "1.1.2",
+  "_originalSource": "amplify"
+}
