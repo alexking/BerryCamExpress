@@ -611,6 +611,7 @@ Small Device Styles
   .other-operating-systems {
     width: 100%;
     margin-left: 0px;
+    padding: 5px 5px 18px 5px;
   }
 
   .mobile-devices ul,
