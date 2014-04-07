@@ -464,7 +464,44 @@ Full-Width Styles
     margin-left: 20px;
   }
 
+.mobile-devices {
+  width: 49%; background: #DEDEDE; color: black; display: block; float: left; text-align: center; margin-right: 1%; margin-bottom: 20px;
+  padding: 10px 10px 18px 10px;
+  box-sizing: border-box;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #ACACAC;
+}
 
+.other-operating-systems {
+  width: 49%; background: #DEDEDE; color: black; display: block; float: left; text-align: center; margin-bottom: 20px;
+  padding: 10px 10px 18px 10px;
+  box-sizing: border-box;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #ACACAC;
+}
+
+.mobile-devices ul,
+.other-operating-systems ul {
+  font-size: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-devices ul li,
+.other-operating-systems ul li {
+  display: inline;
+  margin-left: 16px;
+}
+
+.mobile-devices ul li:first-child,
+.other-operating-systems ul li:first-child {
+  margin-left: 0px;
+}
 
 /*******************************************************************************
 Small Device Styles
@@ -525,6 +562,12 @@ Small Device Styles
     margin-left: 10px;
   }
 
+  .mobile-devices,
+  .other-operating-systems {
+    width: 100%;
+    margin-left: 0px;
+  }
+
   h1 {
     font-size: 28px;
   }
@@ -553,6 +596,21 @@ Small Device Styles
     min-width: 320px;
     max-width: 95%;
     font-size: 11px;
+  }
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 762px) {
+
+  .mobile-devices,
+  .other-operating-systems {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .mobile-devices ul,
+  .other-operating-systems ul {
+    font-size: 24px;
   }
 
 }
