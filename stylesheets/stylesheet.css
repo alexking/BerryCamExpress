@@ -53,7 +53,7 @@ body {
   color:#373737;
   background: #212121;
   font-size: 16px;
-  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  font-family: 'Myriad Pro', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -322,7 +322,7 @@ Full-Width Styles
 #app-image {
   display: inline-block; 
   width: 100%; 
-  height: 500px; 
+  padding-bottom: 60%; 
   background: url('../images/tablets-themes-github.png') no-repeat 0% 90%;
   background-size: cover;
 }
@@ -491,6 +491,10 @@ Small Device Styles
     display: none;
   }
 
+  p.copyright {
+    padding-right: 30%;
+  }
+
   h1 {
     font-size: 28px;
   }
@@ -517,8 +521,48 @@ Small Device Styles
 
   code, pre {
     min-width: 320px;
-    max-width: 340px;
+    max-width: 95%;
     font-size: 11px;
   }
 
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+  #project_title {
+  font-size: 32px;
+  }
+
+  #project_tagline {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  #app-image {
+    display: inline-block; 
+    width: 100%; 
+    padding-bottom: 60%; 
+    background: url('../images/tablets-themes-github.png') no-repeat 0% 90%;
+    background-size: cover;
+  }
+
+  #app-icon {
+    display: none;
+  }
+
+  #footer_wrap {
+    text-align: center;
+  }
+
+  p.copyright {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+
+  code, pre {
+   max-width: 96%;
+   font-size: 11px;
+ }
+   
 }
