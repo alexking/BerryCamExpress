@@ -335,6 +335,7 @@ Full-Width Styles
   float: right; 
   margin-left: 20px;
   margin-top: 10px;
+  margin-bottom: 60px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -449,6 +450,20 @@ Full-Width Styles
   font-size: 20px;
 }
 
+  .tagline-line,
+  .platform-line,
+  .copyright-line {
+    display: inline;
+  }
+
+  .platform-icons {
+    font-size: 32px;
+  }
+
+  .platform-icons i {
+    margin-left: 20px;
+  }
+
 
 
 /*******************************************************************************
@@ -456,6 +471,7 @@ Small Device Styles
 *******************************************************************************/
 
 @media screen and (max-width: 480px) {
+
   body {
     font-size:14px;
   }
@@ -493,6 +509,20 @@ Small Device Styles
 
   p.copyright {
     padding-right: 30%;
+  }
+
+  .tagline-line,
+  .platform-line,
+  .copyright-line {
+    display: block;
+  }
+
+  .platform-icons {
+    font-size: 22px;
+  }
+
+  .platform-icons i {
+    margin-left: 10px;
   }
 
   h1 {
@@ -558,6 +588,19 @@ Small Device Styles
   p.copyright {
     padding-left: 25%;
     padding-right: 25%;
+  }
+
+  .tagline-line,
+  .copyright-line {
+    display: block;
+  }
+
+  .platform-line {
+    display: inline;
+  }
+
+  .platform-icons {
+    font-size: 22px;
   }
 
   code, pre {
