@@ -3,7 +3,7 @@ temp/
 .tmp
 .grunt
 .idea
-bin/
-dist/
+/bin/
+/dist/
 app/berrycamimages
 app/berrycamimages~
