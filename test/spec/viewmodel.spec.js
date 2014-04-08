@@ -9,13 +9,13 @@ define(['viewmodel',
 
         'use strict';
 
-        describe('jquery', function () {
+        describe('viewmodel', function () {
 
             function checkIsDefined(val) {
                 expect(val).toBeDefined();
             }
 
-            xdescribe('viewModel properties', function () {
+            describe('viewModel properties', function () {
 
                 it('should have all properties', function () {
 
@@ -47,6 +47,25 @@ define(['viewmodel',
             });
 
             describe('computed observables', function () {
+
+                describe('currentImageFilenameFormatted', function () {
+
+                    it('should format current filename', function () {
+                        testee.currentImageFilename('some/dir/filename');
+                        expect(testee.currentImageFilenameFormatted()).toBe('filename');
+                    });
+
+                    it('should format current filename', function () {
+                        testee.currentImageFilename('dir/filename');
+                        expect(testee.currentImageFilenameFormatted()).toBe('filename');
+                    });
+
+                    it('should return empty string if no current filename', function () {
+                        testee.currentImageFilename(null);
+                        expect(testee.currentImageFilenameFormatted()).toBe('');
+                    });
+
+                });
 
                 describe('showTimelaspseMode', function () {
 
