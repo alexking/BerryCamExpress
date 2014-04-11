@@ -1,4 +1,3 @@
-node_modules/
 temp/
 .tmp
 .grunt
@@ -7,3 +6,5 @@ temp/
 /dist/
 app/berrycamimages
 app/berrycamimages~
+/node_modules/grunt-bower-requirejs/node_modules/
+
