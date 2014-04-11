@@ -3,7 +3,6 @@ temp/
 .grunt
 .idea
 /bin/
-/dist/
 app/berrycamimages
 app/berrycamimages~
 /node_modules/grunt-bower-requirejs

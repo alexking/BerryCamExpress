@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>BerryCamExpress</title>
+    <meta name="description" content="Control your Raspberry Pi camera from any network connected device.">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="styles/085c6cda.main.css"/>
+</head>
+<body data-bind="attr: {class: selectedTheme }">
+
+    <div class="container" id="main-container" style="display:none">
+
+        <div class="buttons-top-row" data-bind="foreach: cameraSettingsUpper">
+            <a href="#" data-bind="click: $data.increment">
+                <div data-bind="css: {first: $index() === 0, last: $index() === 3, inner: $index() > 0 && $index() < 3 }" class="small-button upper">
+                    <span data-bind="attr: { class: $data.iconClass }"></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="clearer"></div>
+
+        <div class="settings-panel-settings">
+
+            <div class="button-left-panel">
+                <a href="#">
+                    <div class="small-button" data-toggle="modal" data-target="#modal-image-settings">
+                        <span class="icon-icon-quality"></span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="panel">
+
+                <!-- ko foreach: cameraSettingsUpper -->
+                <div class="panel-header" data-bind="html: $data.label"></div>
+                <!-- /ko -->
+
+                <div class="clearer"></div>
+
+                <!-- ko foreach: cameraSettingsUpper -->
+                <div class="panel-values-upper" data-bind="html: $data.selectedValue">&nbsp;</div>
+                <!-- /ko -->
+
+                <div class="clearer"></div>
+
+                <!-- ko foreach: cameraSettingsLower -->
+                <div class="panel-header lower" data-bind="html: $data.label"></div>
+                <!-- /ko -->
+
+                <div class="clearer"></div>
+
+                <!-- ko foreach: cameraSettingsLower -->
+                <div data-bind="html: $data.selectedValue" class="panel-values-lower">&nbsp;</div>
+                <!-- /ko -->
+
+                <div class="clearer"></div>
+
+                <!-- ko foreach: cameraSettingsBottomTopRow -->
+                <div class="panel-header lower" data-bind="html: $data.label"></div>
+                <!-- /ko -->
+
+                <div class="clearer"></div>
+
+                <!-- ko foreach: cameraSettingsBottomTopRow -->
+                <div data-bind="html: $data.selectedValue" class="panel-values-bottom">&nbsp;</div>
+                <!-- /ko -->
+
+            </div>
+
+            <div class="button-right-panel">
+                <a href="#">
+                    <div class="small-button" data-toggle="modal" data-target="#modal-adjustment-settings">
+                        <span class="icon-icon-img-settings"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="clearer"></div>
+
+        </div>
+
+        <div class="clearer"></div>
+
+        <!-- Image Preview Area -->
+        <div class="image-preview" data-bind="visible: !showCaptureIntervals()">
+            <img id="preview-image" src="images/giraffe.jpg">
+        </div>
+
+        <div class="image-filename-text" data-bind="text: currentImageFilenameFormatted"></div>
+
+        <div class="clearer"></div>
+
+        <!-- Timelapse Control Area -->
+        <div class="timelapse-settings" data-bind="visible: showCaptureIntervals">
+            <br><br>
+            <div class="clearer"></div>
+
+            <div class="timelapse-settings-inputs">
+
+                <div class="panel-header timelapse">Capture Interval (HH:MM:SS)</div>
+
+                <!-- ko foreach: captureIntervals -->
+                    <div class="timelapse-interval" data-bind="text: selectedValueFormatted"></div>
+                    <!-- ko if: $index() < 2 -->
+                    <div class="timelapse-separator">:</div>
+                    <!-- /ko -->
+                <!-- /ko -->
+
+                <div class="adjustments" data-bind="foreach: captureIntervals">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>
+                        <button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>
+                    </div>
+                </div>
+
+                <div class="clearer"></div>
+                <br>
+
+            </div>
+            
+            <div class="clearer"></div>
+            
+            <br>
+            
+            <div class="timelapse-mode" data-bind="with: timeLapseMode">
+                <span class="timelapse-mode-header" data-bind="text: label"></span>
+                <div class="btn-group" data-bind="foreach: values">
+                    <button type="button" class="btn btn-default" data-bind="text: $data, click: $parent.selectedValue, css: { selected: $data === $parent.selectedValue() }"></button>
+                </div>
+                <div class="clearer"></div>
+            </div>
+
+            <div class="clearer"></div>
+            
+            <br>
+
+            <div id="timelapse-timed" data-bind="css: {shown: showTimelaspseMode}">
+
+                <div class="timelapse-settings-inputs time-window">
+
+                    <div class="panel-header timelapse">Start Capturing (HH:MM)</div>
+
+                    <!-- ko foreach: captureIntervalStart -->
+                    <div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>
+                    <!-- ko if: $index() < 1 -->
+                    <div class="timelapse-separator smaller">:</div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <div class="clearer"></div>
+                    <div class="adjustments-time-window" data-bind="foreach: captureIntervalStart">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>
+                            <button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="clearer"></div>
+
+                </div>
+
+                <span class="glyphicon glyphicon-play timelapse-settings-arrow"></span>
+
+                <div class="timelapse-settings-inputs time-window end">
+
+                    <div class="panel-header timelapse">End Capturing (HH:MM)</div>
+
+                    <!-- ko foreach: captureIntervalEnd -->
+                    <div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>
+                    <!-- ko if: $index() < 1 -->
+                    <div class="timelapse-separator smaller">:</div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <div class="clearer"></div>
+                    <div class="adjustments-time-window" data-bind="foreach: captureIntervalEnd">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>
+                            <button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="clearer"></div>
+
+                </div>
+
+            </div>
+
+            <div class="clearer"></div>
+
+            <br><br>
+
+            <a class="btn btn-primary output-folder" href="berrycamimages" target="_blank"><span class="glyphicon glyphicon-picture"></span>
+            <span class="output-folder-label">&nbsp;&nbsp;&nbsp;&nbsp;View output folder</span></a>
+
+            <div class="clearer"></div>
+
+            <div class="timelapse-mode-smaller shown">
+                <div class="continuous shown">
+                    <a href="#" data-bind="click: toggleIimeLapseMode">
+                        <div class="small-button" data-bind="text: timeLapseShortLabel">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clearer"></div>
+
+        <!-- Lower Controls Area -->
+        <div class="buttons-bottom-row">
+
+            <!-- ko foreach: cameraSettingsBottomBottomRow -->
+                <!-- ko if: $index() === 1 -->
+                <a href="#">
+                    <div class="small-button lower" data-toggle="modal" data-target="#modal-capture-settings">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </div>
+                </a>
+                <!-- /ko -->
+            <!-- /ko -->
+
+            <a href="#" data-bind="click: doShutterPress">
+                <div class="large-button">
+                    <i class="spinner-large glyphicon glyphicon-camera" data-bind="ajaxSpinner: isMakingAjaxRequest, spinnerOptions: {
+                                lines: 9,
+                                length: 0,
+                                width: 20,
+                                radius: 24,
+                                trail: 60,
+                                top: '22px',
+                                left: '20px',
+                                color: '#000'
+                        }"></i>
+                    <i class="spinner-small glyphicon glyphicon-camera" data-bind="ajaxSpinner: isMakingAjaxRequest, spinnerOptions: {
+                                lines: 9,
+                                length: 0,
+                                width: 10,
+                                radius: 14,
+                                trail: 60,
+                                top: '16px',
+                                left: '12px',
+                                color: '#000'
+                        }"></i>
+                </div>
+            </a>
+
+            <!-- ko foreach: cameraSettingsBottomBottomRow -->
+                <!-- ko if: $index() === 0 -->
+                <a href="#">
+                    <div class="small-button lower" data-toggle="modal" data-target="#modal-image-fx">
+                        <span data-bind="attr: { class: $data.iconClass }"></span>
+                    </div>
+                </a>
+                <!-- /ko -->
+            <!-- /ko -->
+
+        </div>
+
+    </div>
+
+
+
+    <!-- modals -->
+
+    <!-- Image FX Modal View -->
+    <div class="modal fade" id="modal-image-fx" tabindex="-2" role="dialog" aria-labelledby="modalFX" aria-hidden="true">
+        <div class="modal-dialog image-fx">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Image Effects</h4>
+                </div>
+                <div class="modal-body" data-bind="foreach: cameraSettingsBottomBottomRow">
+                    <!-- ko if: $index() === 0 -->
+                        <div class="list-group" data-bind="foreach: $data.values">
+                            <a href="#" class="list-group-item" data-bind="text: $data, click: $parent.selectedValue, css: { selected: $data === $parent.selectedValue() }"></a>
+                        </div>
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary fx" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capture Mode Modal View -->
+    <div class="modal fade" id="modal-capture-settings" tabindex="-2" role="dialog" aria-labelledby="modalCapture" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">General Settings</h4>
+                </div>
+                <br>
+                <div class="modal-body">
+
+                    <!-- ko if: isTimelapseEnabled -->
+                    <!-- ko foreach: cameraSettingsBottomBottomRow -->
+                    <!-- ko if: $index() === 1 -->
+                        <span data-bind="text: $data.label"></span>
+                        <div class="btn-group">
+                            <!-- ko foreach: $data.values -->
+                            <button type="button" class="btn btn-default" data-bind="text: $data, click: $parent.selectedValue, css: { selected: $data === $parent.selectedValue() }"></button>
+                            <!-- /ko -->
+                        </div>
+                        <div class="clearer"></div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <br><br>
+                    <!-- /ko -->
+
+                    <!-- ko with: themes -->
+                    <span data-bind="text: $data.label"></span>
+
+                    <select class="form-control btn-group" data-bind="options: $data.values, value: $data.selectedValue"></select>
+
+                    <div class="clearer"></div>
+                    <!-- /ko -->
+
+                    <br><br>
+                    <button class="btn btn-default" data-bind="click: resetCameraSettings">Reset default camera settings</button>
+
+                    <!-- ko if: isTimelapseEnabled -->
+                    <br><br>
+                    <button type="button" class="btn btn-default" data-bind="click: killTimers">Kill timers</button>
+                    <!-- /ko -->
+
+                    <div class="clearer"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Adjustment Modal View -->
+    <div class="modal fade" id="modal-adjustment-settings" tabindex="-2" role="dialog" aria-labelledby="modalAdjustment" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Adjustment Settings</h4>
+                </div>
+                <br>
+                <div class="modal-body" data-bind="foreach: cameraSettingsLower">
+                    <div data-bind="text: $data.label"></div>
+                    <input data-bind="sliderValue: $data.selectedValue, 'dataSliderMin': $data.minValue"
+                           type="text"
+                           class="span2"
+                           data-slider-max="100"
+                           data-slider-orientation="horizontal"
+                           data-slider-selection="before"
+                           data-slider-tooltip="hide">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Settings Modal View -->
+    <div class="modal fade" id="modal-image-settings" tabindex="-1" role="dialog" aria-labelledby="modalSettings" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Image Settings</h4>
+                </div>
+                <br>
+                <div class="modal-body">
+                    <!-- ko foreach: sizeAndFx -->
+                        <span data-bind="text: $data.label"></span>
+                        <div class="btn-group sizeSettings">
+                            <!-- ko foreach: $data.values -->
+                            <button type="button" class="btn btn-default" data-bind="text: $data, click: $parent.selectedValue, css: { selected: $data === $parent.selectedValue() }"></button>
+                            <!-- /ko -->
+                        </div>
+                        <div class="smallClearer"></div>
+                    <!-- /ko -->
+
+                    <div class="clearer"></div>
+                    <br><br>
+
+                    <!-- ko foreach: compression -->
+                        <div data-bind="text: $data.label"></div>
+                        <input data-bind="sliderValue: $data.selectedValue"
+                               type="text"
+                               class="span2"
+                               data-slider-min="0"
+                               data-slider-max="100"
+                               data-slider-orientation="horizontal"
+                               data-slider-selection="before"
+                               data-slider-tooltip="hide">
+                    <!-- /ko -->
+
+                    <!-- ko foreach: flips -->
+                        <span data-bind="text: $data.label"></span>
+                        <div class="btn-group hflip">
+                            <!-- ko foreach: $data.values -->
+                            <button type="button" class="btn btn-default" data-bind="text: $data, click: $parent.selectedValue, css: { selected: $data === $parent.selectedValue() }"></button>
+                            <!-- /ko -->
+                        </div>
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script data-main="scripts/f653cc19.main" src="bower_components/requirejs/require.js"></script>
+
+</body>
+</html>
