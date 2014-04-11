@@ -1,7 +1,7 @@
 BerryCamExpress
 ===============
 
-# Full build and setup
+## Full build and setup
 1. Install nodejs on the pi
 2. Install Bower on the pi - 'npm install -g bower'
 3. Install Grunt on the pi - 'npm install -g grunt-cli'
@@ -11,7 +11,7 @@ BerryCamExpress
 7. Go to <install-directory>/dist/ - run 'node berrycam-server.js' - will start the camera server program at http://localhost:3000
 8. Hit the shutter button on the browser - it should be working...
 
-# Quick set-up
+## Quick set-up
 1. Install nodejs on the pi
 2. Clone project from git - 'git pull git@github.com:pitography/BerryCamExpress.git'
 3. Go to <install-directory> - run 'npm install'
