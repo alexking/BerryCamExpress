@@ -75,5 +75,5 @@ The interface should appear on the screen. Press the camera button to take a tes
 
 ### Using the app
 
-FOr more information and tips on using BerryCam Express head on over to the wiki:
+For more information and tips on using BerryCam Express head on over to the wiki:
 https://github.com/pitography/BerryCamExpress/wiki/Taking-Pictures
