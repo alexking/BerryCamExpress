@@ -7,3 +7,4 @@ app/berrycamimages
 app/berrycamimages~
 /node_modules/grunt-bower-requirejs
 /node_modules/raspicam
+/node_modules/grunt-contrib-jasmine/node_modules/grunt-lib-phantomjs/node_modules

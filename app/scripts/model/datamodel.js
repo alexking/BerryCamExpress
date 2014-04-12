@@ -15,8 +15,8 @@ define(['./model', 'jquery'], function (model, $) {
         ifx: new model.CameraSettings('FX', ['None', 'Negative', 'Solarise', 'Posterise', 'Whiteboard', 'Blackboard', 'Sketch', 'Denoise', 'Emboss', 'Oilpaint', 'Hatch', 'Gpen', 'Pastel', 'Watercolour']),
         q: new model.CameraSettings('Compression', [], 100),
         size: new model.CameraSettings('Size', ['Large', 'Medium', 'Small']),
-        hf: new model.CameraSettings('HFlip', ['On', 'Off']),
-        vf: new model.CameraSettings('VFlip', ['On', 'Off']),
+        hf: new model.CameraSettings('HFlip', ['On', 'Off'], 'Off'),
+        vf: new model.CameraSettings('VFlip', ['On', 'Off'], 'Off'),
         mode: new model.CameraSettings('Capture Mode', ['Single Image', 'Timelapse']),
 
         intervalH: new model.CaptureInterval('capIntH', 24),

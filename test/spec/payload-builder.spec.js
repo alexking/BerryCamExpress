@@ -22,8 +22,8 @@ define(['payload-builder', 'main', 'config', 'jquery', 'model/datamodel'], funct
                 data.sa.selectedValue(12);
                 data.ifx.selectedValue('Solarise');
                 data.ISO.selectedValue(200);
-                data.vf.selectedValue('On');
-                data.hf.selectedValue('On');
+                data.vf.selectedValue('Off');
+                data.hf.selectedValue('Off');
             }
 
             beforeEach(function () {
@@ -116,6 +116,28 @@ define(['payload-builder', 'main', 'config', 'jquery', 'model/datamodel'], funct
 
             it('should have correct mode for ISO', function () {
                 expect(payload.ISO).toBe(200);
+            });
+
+            it('should have undefined for vf', function () {
+                expect(payload.vf).toBeUndefined();
+            });
+
+            it('should have undefined mode for hf', function () {
+                expect(payload.hf).toBeUndefined();
+            });
+
+            it('should have correct mode for vf', function () {
+                setupDatamodel();
+                data.vf.selectedValue('On');
+                payload = testee.buildPayload(datamodel);
+                expect(payload.vf).toBe(true);
+            });
+
+            it('should have correct mode for hf', function () {
+                setupDatamodel();
+                data.hf.selectedValue('On');
+                payload = testee.buildPayload(datamodel);
+                expect(payload.hf).toBe(true);
             });
 
         });

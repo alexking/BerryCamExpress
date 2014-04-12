@@ -20,10 +20,16 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function (config,
                 co: data.co.selectedValue(),
                 sa: data.sa.selectedValue(),
                 ifx: data.ifx.selectedValue(),
-                ISO: data.ISO.selectedValue(),
-                vf: data.vf.selectedValue() === 'Off',
-                hf: data.hf.selectedValue() === 'Off'
+                ISO: data.ISO.selectedValue()
             };
+
+        if (data.vf.selectedValue() === 'On') {
+            opts.vf = true;
+        }
+
+        if (data.hf.selectedValue() === 'On') {
+            opts.hf = true;
+        }
 
         if (data.mode.selectedValue() === 'Single Image') {
             opts.mode = 'photo';

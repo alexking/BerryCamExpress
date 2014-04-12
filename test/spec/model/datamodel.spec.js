@@ -79,8 +79,8 @@ define(['model/datamodel', 'model/CameraSettings', 'model/CaptureInterval' ], fu
                 check(data.ifx, 'None');
                 check(data.q, 100);
                 check(data.size, 'Large');
-                check(data.hf, 'On');
-                check(data.vf, 'On');
+                check(data.hf, 'Off');
+                check(data.vf, 'Off');
                 check(data.mode, 'Single Image');
 
                 check(data.intervalH, 0);
