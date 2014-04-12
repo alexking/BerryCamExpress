@@ -21,8 +21,8 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function (config,
                 sa: data.sa.selectedValue(),
                 ifx: data.ifx.selectedValue(),
                 ISO: data.ISO.selectedValue(),
-                vf: data.vf.selectedValue(),
-                hf: data.hf.selectedValue()
+                vf: data.vf.selectedValue() === 'Off',
+                hf: data.hf.selectedValue() === 'Off'
             };
 
         if (data.mode.selectedValue() === 'Single Image') {
