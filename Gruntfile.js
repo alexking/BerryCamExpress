@@ -353,7 +353,9 @@ module.exports = function (grunt) {
                             'bower_components/requirejs/require.js',
                             '{,*/}*.html',
                             'styles/fonts/**/*.*',
-                            'bower_components/bootstrap/fonts/*.*'
+                            'bower_components/bootstrap/fonts/*.*',
+                            'favicon.ico',
+                            'apple-touch-icon.png'
                         ]
                     }
                 ]
