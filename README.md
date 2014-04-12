@@ -72,3 +72,8 @@ Browse to the pi on any device with a web browser on port 3000 - so if your pi w
 ```
 
 The interface should appear on the screen. Press the camera button to take a test photograph.
+
+### Using the app
+
+FOr more information and tips on using BerryCam Express head on over to the wiki:
+https://github.com/pitography/BerryCamExpress/wiki/Taking-Pictures
