@@ -64,6 +64,10 @@ app.get('/berrycam', function (req, res) {
         opts.output = filename;
         camera = new RaspiCam(opts);
 
+        camera.on("exit", function () {
+            console.log('time-lapse done', moment());
+        });
+
         res.json({
             data: 'done'
         });
