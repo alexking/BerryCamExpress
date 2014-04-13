@@ -59,6 +59,7 @@ app.get('/berrycam', function (req, res) {
 
     } else {
 
+        baseFilename = baseFilename + '_timelapse_started_' + moment().format('HH-mm-ss');
         filename = baseFilename + '/' + 'image-%04d' + fileExtension;
         opts.output = filename;
         camera = new RaspiCam(opts);
