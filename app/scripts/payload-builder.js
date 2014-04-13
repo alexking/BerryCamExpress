@@ -36,9 +36,10 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, 
             opts.t = 1000;
         } else if (data.mode.selectedValue() === 'Timelapse') {
             opts.mode = 'timelapse';
+            opts.t = 60000;
             opts.tl = data.intervalH.selectedValue() * 60 * 60 +
                 data.intervalM.selectedValue() * 60 +
-                data.intervalS.selectedValue();
+                data.intervalS.selectedValue() * 1000;
         }
 
         return opts;

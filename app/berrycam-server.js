@@ -10,7 +10,7 @@ var express = require('express'),
     backupPath = baseImageDirectory + '_backup_' + moment().format('HHmmss'),
     fileExtension = '.jpg';
 
-app.configure(function() {
+app.configure(function () {
     app.use(express.compress());
     app.use(express['static'](__dirname));
     app.use('/berrycamimages', express.directory('berrycamimages'));
@@ -22,7 +22,7 @@ app.configure(function() {
     if (fs.existsSync(baseImageDirectory)) {
         fs.renameSync(baseImageDirectory, backupPath);
     } else {
-        mkdirp.sync(baseImageDirectory, function(err) {
+        mkdirp.sync(baseImageDirectory, function (err) {
             if (err) {
                 console.log('error creating dir', baseImageDirectory, err);
             }
@@ -30,7 +30,7 @@ app.configure(function() {
     }
 });
 
-app.get('/berrycam', function(req, res) {
+app.get('/berrycam', function (req, res) {
 
     var opts = req.query,
         filename,
@@ -51,7 +51,7 @@ app.get('/berrycam', function(req, res) {
         opts.output = filename;
         camera = new RaspiCam(opts);
 
-        camera.on("exit", function() {
+        camera.on("exit", function () {
             res.json({
                 filename: filename
             });
@@ -59,26 +59,24 @@ app.get('/berrycam', function(req, res) {
 
     } else {
 
-        filename = baseFilename + '/' + '%04d' + fileExtension;
+        filename = baseFilename + '/' + 'image-%04d' + fileExtension;
         opts.output = filename;
         camera = new RaspiCam(opts);
 
-        camera.on("exit", function() {
-            console.log('time-lapse finished');
-            res.json({
-                data: 'done'
-            });
+        res.json({
+            data: 'done'
         });
     }
 
     camera.start();
+
 });
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
     res.send('Resource not found', 404);
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     console.log('Error', err, req, res);
     if (req.xhr) {
         res.send(500, 'Error', err);
