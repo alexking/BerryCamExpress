@@ -59,12 +59,6 @@ app.get('/berrycam', function (req, res) {
 
     } else {
 
-        mkdirp.sync(baseImageDirectory + '/' + , function (err) {
-            if (err) {
-                console.log('error creating directory');
-            }
-        });
-
         filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
         opts.output = filename;
         camera = new RaspiCam(opts);
