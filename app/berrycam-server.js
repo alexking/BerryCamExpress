@@ -58,7 +58,7 @@ app.get('/berrycam', function (req, res) {
         });
 
     } else {
-        filename = baseFilename + '/' + moment().format('HH-mm-ss') + '/image-%04d' + fileExtension;
+        filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
         opts.output = filename;
         camera = new RaspiCam(opts);
 
