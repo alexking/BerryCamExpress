@@ -1,4 +1,4 @@
-define(['config', 'image-utils', 'jquery', 'model/datamodel'], function (config, imageUtils, $, datamodel) {
+define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, imageUtils, $, datamodel) {
 
     'use strict';
 
@@ -33,8 +33,12 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function (config,
 
         if (data.mode.selectedValue() === 'Single Image') {
             opts.mode = 'photo';
+            opts.t = 1000;
         } else if (data.mode.selectedValue() === 'Timelapse') {
             opts.mode = 'timelapse';
+            opts.tl = data.intervalH.selectedValue() * 60 * 60 +
+                data.intervalM.selectedValue() * 60 +
+                data.intervalS.selectedValue();
         }
 
         return opts;

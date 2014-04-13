@@ -2,7 +2,8 @@ define(['knockout',
     'model/model',
     'model/datamodel',
     'services/datacontext',
-    'error-handler'], function (ko, model, datamodel, ctx, errorHandler) {
+    'error-handler'
+], function (ko, model, datamodel, ctx, errorHandler) {
 
     'use strict';
 
@@ -97,7 +98,8 @@ define(['knockout',
         }),
 
         toggleIimeLapseMode = function () {
-            var current = data.timeLapseMode.selectedValue(), newVal;
+            var current = data.timeLapseMode.selectedValue(),
+                newVal;
             if (current === 'Continuous') {
                 newVal = 'Time Window';
             } else {
@@ -120,8 +122,16 @@ define(['knockout',
                 return;
             }
 
-            $image.fadeTo('slow', 0.2);
+            if (data.mode.selectedValue() === 'Single Image') {
+                takeSinglePhoto();
+            } else {
+                startTimelapse();
+            }
+        },
 
+        takeSinglePhoto = function () {
+
+            $image.fadeTo('slow', 0.2);
             isMakingAjaxRequest(true);
 
             ctx.camera.shutterPress().done(function (results) {
@@ -129,6 +139,16 @@ define(['knockout',
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
                 errorHandler.handleError('creating image failed');
+                isMakingAjaxRequest(false);
+            });
+        },
+
+        startTimelapse = function () {
+
+            ctx.camera.shutterPress().done(function () {
+                alert('time-lapse started');
+            }).fail(function () {
+                errorHandler.handleError('starting time-lapse failed');
                 isMakingAjaxRequest(false);
             });
         },
@@ -172,7 +192,7 @@ define(['knockout',
         currentImageFilenameFormatted: currentImageFilenameFormatted,
         isMakingAjaxRequest: isMakingAjaxRequest,
         resetCameraSettings: resetCameraSettings,
-        isTimelapseEnabled: false // time-lapes not fully implemented
+        isTimelapseEnabled: true
     };
 
 });

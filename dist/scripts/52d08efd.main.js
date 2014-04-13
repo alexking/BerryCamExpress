@@ -14388,7 +14388,7 @@ define('image-utils',['config'], function (config) {
 
 });
 
-define('payload-builder',['config', 'image-utils', 'jquery', 'model/datamodel'], function (config, imageUtils, $, datamodel) {
+define('payload-builder',['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, imageUtils, $, datamodel) {
 
     
 
@@ -14423,8 +14423,12 @@ define('payload-builder',['config', 'image-utils', 'jquery', 'model/datamodel'],
 
         if (data.mode.selectedValue() === 'Single Image') {
             opts.mode = 'photo';
+            opts.t = 1000;
         } else if (data.mode.selectedValue() === 'Timelapse') {
             opts.mode = 'timelapse';
+            opts.tl = data.intervalH.selectedValue() * 60 * 60 +
+                data.intervalM.selectedValue() * 60 +
+                data.intervalS.selectedValue();
         }
 
         return opts;
@@ -14499,7 +14503,8 @@ define('viewmodel',['knockout',
     'model/model',
     'model/datamodel',
     'services/datacontext',
-    'error-handler'], function (ko, model, datamodel, ctx, errorHandler) {
+    'error-handler'
+], function (ko, model, datamodel, ctx, errorHandler) {
 
     
 
@@ -14594,7 +14599,8 @@ define('viewmodel',['knockout',
         }),
 
         toggleIimeLapseMode = function () {
-            var current = data.timeLapseMode.selectedValue(), newVal;
+            var current = data.timeLapseMode.selectedValue(),
+                newVal;
             if (current === 'Continuous') {
                 newVal = 'Time Window';
             } else {
@@ -14617,8 +14623,16 @@ define('viewmodel',['knockout',
                 return;
             }
 
-            $image.fadeTo('slow', 0.2);
+            if (data.mode.selectedValue() === 'Single Image') {
+                takeSinglePhoto();
+            } else {
+                startTimelapse();
+            }
+        },
 
+        takeSinglePhoto = function () {
+
+            $image.fadeTo('slow', 0.2);
             isMakingAjaxRequest(true);
 
             ctx.camera.shutterPress().done(function (results) {
@@ -14626,6 +14640,16 @@ define('viewmodel',['knockout',
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
                 errorHandler.handleError('creating image failed');
+                isMakingAjaxRequest(false);
+            });
+        },
+
+        startTimelapse = function () {
+
+            ctx.camera.shutterPress().done(function () {
+                alert('time-lapse started');
+            }).fail(function () {
+                errorHandler.handleError('starting time-lapse failed');
                 isMakingAjaxRequest(false);
             });
         },
@@ -14669,7 +14693,7 @@ define('viewmodel',['knockout',
         currentImageFilenameFormatted: currentImageFilenameFormatted,
         isMakingAjaxRequest: isMakingAjaxRequest,
         resetCameraSettings: resetCameraSettings,
-        isTimelapseEnabled: false // time-lapes not fully implemented
+        isTimelapseEnabled: true
     };
 
 });
@@ -17529,7 +17553,7 @@ require.config({
     }
 });
 
-define('57d82a86.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
+define('52d08efd.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
 
     
 
