@@ -21,7 +21,7 @@ define(['./model', 'jquery'], function (model, $) {
 
         intervalH: new model.CaptureInterval('capIntH', 24),
         intervalM: new model.CaptureInterval('capIntM', 60),
-        intervalS: new model.CaptureInterval('capIntS', 60, 15),
+        intervalS: new model.CaptureInterval('capIntS', 60, 5),
         intervalStartH: new model.CaptureInterval('capIntStartH', 24),
         intervalStartM: new model.CaptureInterval('capIntStartM', 60),
         intervalEndH: new model.CaptureInterval('capIntEndH', 24),

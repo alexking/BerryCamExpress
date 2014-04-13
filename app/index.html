@@ -144,49 +144,51 @@
 
             <div id="timelapse-timed" data-bind="css: {shown: showTimelaspseMode}">
 
-                <div class="timelapse-settings-inputs time-window">
+                <!--<div class="timelapse-settings-inputs time-window">-->
 
-                    <div class="panel-header timelapse">Start Capturing (HH:MM)</div>
+                    <!--<div class="panel-header timelapse">Start Capturing (HH:MM)</div>-->
 
-                    <!-- ko foreach: captureIntervalStart -->
-                    <div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>
-                    <!-- ko if: $index() < 1 -->
-                    <div class="timelapse-separator smaller">:</div>
-                    <!-- /ko -->
-                    <!-- /ko -->
-                    <div class="clearer"></div>
-                    <div class="adjustments-time-window" data-bind="foreach: captureIntervalStart">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>
-                            <button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="clearer"></div>
+                    <!--&lt;!&ndash; ko foreach: captureIntervalStart &ndash;&gt;-->
+                    <!--<div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>-->
+                    <!--&lt;!&ndash; ko if: $index() < 1 &ndash;&gt;-->
+                    <!--<div class="timelapse-separator smaller">:</div>-->
+                    <!--&lt;!&ndash; /ko &ndash;&gt;-->
+                    <!--&lt;!&ndash; /ko &ndash;&gt;-->
+                    <!--<div class="clearer"></div>-->
+                    <!--<div class="adjustments-time-window" data-bind="foreach: captureIntervalStart">-->
+                        <!--<div class="btn-group">-->
+                            <!--<button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>-->
+                            <!--<button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="clearer"></div>-->
 
-                </div>
+                <!--</div>-->
 
-                <span class="glyphicon glyphicon-play timelapse-settings-arrow"></span>
+                <!--<span class="glyphicon glyphicon-play timelapse-settings-arrow"></span>-->
 
-                <div class="timelapse-settings-inputs time-window end">
+                <!--<div class="timelapse-settings-inputs time-window end">-->
 
-                    <div class="panel-header timelapse">End Capturing (HH:MM)</div>
+                    <!--<div class="panel-header timelapse">End Capturing (HH:MM)</div>-->
 
-                    <!-- ko foreach: captureIntervalEnd -->
-                    <div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>
-                    <!-- ko if: $index() < 1 -->
-                    <div class="timelapse-separator smaller">:</div>
-                    <!-- /ko -->
-                    <!-- /ko -->
-                    <div class="clearer"></div>
-                    <div class="adjustments-time-window" data-bind="foreach: captureIntervalEnd">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>
-                            <button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="clearer"></div>
+                    <!--&lt;!&ndash; ko foreach: captureIntervalEnd &ndash;&gt;-->
+                    <!--<div class="timelapse-interval smaller" data-bind="text: selectedValueFormatted, css: { hours: $index() === 0 }"></div>-->
+                    <!--&lt;!&ndash; ko if: $index() < 1 &ndash;&gt;-->
+                    <!--<div class="timelapse-separator smaller">:</div>-->
+                    <!--&lt;!&ndash; /ko &ndash;&gt;-->
+                    <!--&lt;!&ndash; /ko &ndash;&gt;-->
+                    <!--<div class="clearer"></div>-->
+                    <!--<div class="adjustments-time-window" data-bind="foreach: captureIntervalEnd">-->
+                        <!--<div class="btn-group">-->
+                            <!--<button type="button" class="btn btn-default" data-bind="click: decrement">&minus;</button>-->
+                            <!--<button type="button" class="btn btn-default" data-bind="click: increment">&plus;</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="clearer"></div>-->
 
-                </div>
+                <!--</div>-->
+
+                <p data-bind="visible: showTimelaspseMode">Not yet implemented</p>
 
             </div>
 
