@@ -4,8 +4,8 @@ BerryCam Express
 First of all make sure that you have the latest version of raspbian running on your Raspberry Pi:
 
 ``` 
-sudo apt-get upgrade
 sudo apt-get update
+sudo apt-get upgrade
 ```
 
 ### Install NodeJS and Node Package Manager
@@ -39,6 +39,7 @@ which should reveal the version number `1.2.15` or the version that you have ins
 We need to pull all the code that runs BerryCam Express down into your user directory (or the location of your choosing). To clone within the `/home/pi` directory:
 
 ```
+cd ~
 git clone https://github.com/pitography/BerryCamExpress.git
 ```
 
