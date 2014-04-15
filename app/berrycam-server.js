@@ -36,7 +36,8 @@ app.get('/berrycam', function (req, res) {
         filename,
         sequenceNumber,
         camera,
-        mode = opts.mode;
+        mode = opts.mode,
+        timerStart;
 
     function padNumber(num) {
         var pad = '0000';
@@ -57,22 +58,27 @@ app.get('/berrycam', function (req, res) {
             });
         });
 
+        camera.start();
+
     } else {
 
         filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
         opts.output = filename;
+        timerStart = opts.timerStart || 0;
         camera = new RaspiCam(opts);
 
         camera.on("exit", function () {
             console.log('time-lapse done', moment().format());
         });
 
+        setTimeout(function () {
+            camera.start();
+        }, timerStart);
+
         res.json({
             data: 'done'
         });
     }
-
-    camera.start();
 
 });
 

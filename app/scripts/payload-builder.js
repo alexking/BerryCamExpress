@@ -1,4 +1,4 @@
-define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, imageUtils, $, datamodel) {
+define(['config', 'image-utils', 'jquery', 'model/datamodel', 'moment'], function (config, imageUtils, $, datamodel, moment) {
 
     'use strict';
 
@@ -6,6 +6,9 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, 
 
         var data = datamodel.data,
             dimensions = imageUtils.createImageDimension(data.size.selectedValue()),
+            now = moment(),
+            startTime,
+            stopTime,
             opts = {
                 w: dimensions.width,
                 h: dimensions.height,
@@ -23,6 +26,15 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, 
                 ISO: data.ISO.selectedValue()
             };
 
+        function calculateTimelapseInterval() {
+
+            var timelapseIntervalHours = data.intervalH.selectedValue() * 3600 * 1000,
+                timelapseIntervalMins = data.intervalM.selectedValue() * 60 * 1000,
+                timelapseIntervalSecs = data.intervalS.selectedValue() * 1000;
+
+            return timelapseIntervalHours + timelapseIntervalMins + timelapseIntervalSecs;
+        }
+
         if (data.vf.selectedValue() === 'On') {
             opts.vf = true;
         }
@@ -36,10 +48,28 @@ define(['config', 'image-utils', 'jquery', 'model/datamodel'], function(config, 
             opts.t = 1000;
         } else if (data.mode.selectedValue() === 'Timelapse') {
             opts.mode = 'timelapse';
-            opts.t = 60000;
-            opts.tl = data.intervalH.selectedValue() * 60 * 60 +
-                data.intervalM.selectedValue() * 60 +
-                data.intervalS.selectedValue() * 1000;
+            opts.tl = calculateTimelapseInterval();
+
+            if (data.timeLapseMode.selectedValue() === 'Time Window') {
+
+                startTime = moment().hour(data.intervalStartH.selectedValue()).minute(data.intervalStartM.selectedValue()).second(0);
+                stopTime = moment().hour(data.intervalEndH.selectedValue()).minute(data.intervalEndM.selectedValue()).second(0);
+
+                if (startTime.isBefore(now)) {
+                    startTime.add('days', 1);
+                    stopTime.add('days', 1);
+                }
+
+                if (stopTime.isBefore(startTime)) {
+                    stopTime.add('days', 1);
+                }
+
+                opts.t = stopTime.valueOf() - startTime.valueOf();
+                opts.timerStart = startTime.valueOf() - now.valueOf();
+
+            } else {
+                opts.t = 0;
+            }
         }
 
         return opts;
