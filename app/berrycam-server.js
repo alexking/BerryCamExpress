@@ -65,6 +65,7 @@ app.get('/berrycam', function (req, res) {
         filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
         opts.output = filename;
         timerStart = opts.timerStart || 0;
+        delete opts.timerStart;
         camera = new RaspiCam(opts);
 
         camera.on("exit", function () {
