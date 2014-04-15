@@ -80,7 +80,6 @@ app.get('/berrycam', function (req, res) {
             data: 'done'
         });
     }
-
 });
 
 app.get('*', function (req, res) {
