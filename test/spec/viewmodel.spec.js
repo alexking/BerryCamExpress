@@ -132,7 +132,7 @@ define(['viewmodel',
 
             });
 
-            describe('doShutterPress', function () {
+            describe('doShutterPress - single image', function () {
 
                 var def, ctxStub, loadStub, errorHandlerStub;
 
@@ -150,45 +150,70 @@ define(['viewmodel',
                     errorHandlerStub.restore();
                 });
 
-                describe('isMakingAjaxRequest', function () {
+                it('should not call context camera shutterpress function', function () {
+                    testee.isMakingAjaxRequest(true);
+                    testee.doShutterPress();
+                    sinon.assert.notCalled(ctxStub);
+                });
 
-                    it('should not call context camera shutterpress function', function () {
-                        testee.isMakingAjaxRequest(true);
-                        testee.doShutterPress();
-                        sinon.assert.notCalled(ctxStub);
+                it('should call context camera shutterpress function', function () {
+                    testee.doShutterPress();
+                    sinon.assert.called(ctxStub);
+                });
+
+                describe('single image', function () {
+
+                    beforeEach(function () {
+                        datamodel.data.mode.selectedValue('Single Image');
+                    });
+
+                    describe('not isMakingAjaxRequest', function () {
+
+                        it('should handle done - good data', function () {
+                            testee.doShutterPress();
+                            def.resolve({
+                                filename: 'fn'
+                            });
+                            sinon.assert.called(loadStub);
+                        });
+
+                        it('should handle done - bad data', function () {
+                            testee.doShutterPress();
+                            def.resolve({});
+                            sinon.assert.notCalled(loadStub);
+                            sinon.assert.called(errorHandlerStub, 'loading image failed');
+                        });
+
+                        it('should handle fail - set isMakingAjaxRequest false', function () {
+                            testee.doShutterPress();
+                            expect(testee.isMakingAjaxRequest()).toBe(true);
+                            def.reject();
+                            expect(testee.isMakingAjaxRequest()).toBe(false);
+                            sinon.assert.notCalled(loadStub);
+                            sinon.assert.calledWith(errorHandlerStub, 'creating image failed');
+                        });
+
                     });
 
                 });
 
-                describe('not isMakingAjaxRequest', function () {
+                describe('time-lapse mode', function () {
 
-                    it('should call context camera shutterpress function', function () {
-                        testee.doShutterPress();
-                        sinon.assert.called(ctxStub);
+                    beforeEach(function () {
+                        datamodel.data.mode.selectedValue('Timelapse');
                     });
 
-                    it('should handle done - good data', function () {
+                    it('should handle fail', function () {
                         testee.doShutterPress();
-                        def.resolve({
-                            filename: 'fn'
-                        });
-                        sinon.assert.called(loadStub);
+                        def.reject();
+                        sinon.assert.calledWith(errorHandlerStub, 'starting time-lapse failed');
                     });
 
-                    it('should handle done - bad data', function () {
-                        testee.doShutterPress();
-                        def.resolve({});
-                        sinon.assert.notCalled(loadStub);
-                        sinon.assert.called(errorHandlerStub, 'loading image failed');
-                    });
-
-                    it('should handle fail - set isMakingAjaxRequest false', function () {
+                    it('should always reset isMakingAjaxRequest to false', function () {
                         testee.doShutterPress();
                         expect(testee.isMakingAjaxRequest()).toBe(true);
                         def.reject();
                         expect(testee.isMakingAjaxRequest()).toBe(false);
-                        sinon.assert.notCalled(loadStub);
-                        sinon.assert.calledWith(errorHandlerStub, 'creating image failed');
                     });
 
                 });

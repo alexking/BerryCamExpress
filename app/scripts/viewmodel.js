@@ -145,10 +145,13 @@ define(['knockout',
 
         startTimelapse = function () {
 
+            isMakingAjaxRequest(true);
+
             ctx.camera.shutterPress().done(function () {
-                // alert('time-lapse started');
+                //TODO - notify user that time-lapse job is queued
             }).fail(function () {
                 errorHandler.handleError('starting time-lapse failed');
+            }).always(function () {
                 isMakingAjaxRequest(false);
             });
         },
