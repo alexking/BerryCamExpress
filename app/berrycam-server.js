@@ -45,51 +45,42 @@ app.get('/berrycam', function (req, res) {
         return pad.substring(0, pad.length - num.toString().length) + num;
     }
 
-    if (!camera) {
+    if (mode === 'photo') {
 
-        if (mode === 'photo') {
+        sequenceNumber = ++req.session.imageSequence || 1;
+        req.session.imageSequence = sequenceNumber;
+        filename = baseFilename + '/' + padNumber(sequenceNumber) + fileExtension;
+        opts.output = filename;
+        camera = new RaspiCam(opts);
 
-            sequenceNumber = ++req.session.imageSequence || 1;
-            req.session.imageSequence = sequenceNumber;
-            filename = baseFilename + '/' + padNumber(sequenceNumber) + fileExtension;
-            opts.output = filename;
-            camera = new RaspiCam(opts);
-
-            camera.on("exit", function () {
-                res.json({
-                    filename: filename
-                });
-            });
-
-            camera.start();
-        } else {
-
-            filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
-            opts.output = filename;
-            timerStart = opts.timerStart || 0;
-            delete opts.timerStart;
-            camera = new RaspiCam(opts);
-
-            camera.on("exit", function () {
-                console.log('time-lapse done', moment().format());
-            });
-
-            timeoutId = setTimeout(function () {
-                camera.start();
-            }, timerStart);
-
+        camera.on("exit", function () {
             res.json({
-                data: 'done'
+                filename: filename
             });
-        }
+        });
 
+        camera.start();
     } else {
-        console.log('ERROR - camera already exists');
+
+        filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
+        opts.output = filename;
+        timerStart = opts.timerStart || 0;
+        delete opts.timerStart;
+        camera = new RaspiCam(opts);
+
+        camera.on("exit", function () {
+            console.log('time-lapse done', moment().format());
+        });
+
+        timeoutId = setTimeout(function () {
+            camera.start();
+        }, timerStart);
 
         res.json({
-            error: 'camera already exists'
+            data: 'done'
         });
     }
+
 });
 
 app.get('/killtimer', function (req, res) {

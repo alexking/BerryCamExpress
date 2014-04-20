@@ -144,6 +144,7 @@ define(['knockout',
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
                 errorHandler.handleError('creating image failed');
+            }).always(function () {
                 isMakingAjaxRequest(false);
             });
         },

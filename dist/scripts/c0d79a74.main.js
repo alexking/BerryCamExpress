@@ -17085,6 +17085,7 @@ define('viewmodel',['knockout',
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
                 errorHandler.handleError('creating image failed');
+            }).always(function () {
                 isMakingAjaxRequest(false);
             });
         },
@@ -20016,7 +20017,7 @@ require.config({
     }
 });
 
-define('b3f41815.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
+define('c0d79a74.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
 
     
 
