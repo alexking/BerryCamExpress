@@ -137,6 +137,9 @@ define(['knockout',
             isMakingAjaxRequest(true);
 
             ctx.camera.shutterPress().done(function (results) {
+                if (results.error) {
+                    errorHandler.handleError('creating image failed', results.error);
+                }
                 loadImage(results.filename);
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
@@ -150,8 +153,11 @@ define(['knockout',
             isMakingAjaxRequest(true);
             isTimelapseJobRunning(true);
 
-            ctx.camera.shutterPress().done(function () {
+            ctx.camera.shutterPress().done(function (results) {
                 //TODO - notify user that time-lapse job is queued
+                if (results.error) {
+                    errorHandler.handleError('starting time-lapse failed', results.error);
+                }
             }).fail(function () {
                 errorHandler.handleError('starting time-lapse failed');
             }).always(function () {
@@ -174,9 +180,11 @@ define(['knockout',
         },
 
         killTimer = function () {
-            ctx.camera.killTimer().done(function () {
-                console.log('Timer killed');
+            ctx.camera.killTimer().done(function (results) {
                 isTimelapseJobRunning(false);
+                if (results.error) {
+                    errorHandler.handleError('stopping timer failed', results.error);
+                }
             });
         };
 

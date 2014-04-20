@@ -9,7 +9,8 @@ var express = require('express'),
     baseImageDirectory = __dirname + '/' + baseFilename,
     backupPath = baseImageDirectory + '_backup_' + moment().format('HHmmss'),
     fileExtension = '.jpg',
-    camera;
+    camera,
+    timeoutId;
 
 app.configure(function () {
     app.use(express.compress());
@@ -44,49 +45,74 @@ app.get('/berrycam', function (req, res) {
         return pad.substring(0, pad.length - num.toString().length) + num;
     }
 
-    if (mode === 'photo') {
+    if (!camera) {
 
-        sequenceNumber = ++req.session.imageSequence || 1;
-        req.session.imageSequence = sequenceNumber;
-        filename = baseFilename + '/' + padNumber(sequenceNumber) + fileExtension;
-        opts.output = filename;
-        camera = new RaspiCam(opts);
+        if (mode === 'photo') {
 
-        camera.on("exit", function () {
-            res.json({
-                filename: filename
+            sequenceNumber = ++req.session.imageSequence || 1;
+            req.session.imageSequence = sequenceNumber;
+            filename = baseFilename + '/' + padNumber(sequenceNumber) + fileExtension;
+            opts.output = filename;
+            camera = new RaspiCam(opts);
+
+            camera.on("exit", function () {
+                res.json({
+                    filename: filename
+                });
             });
-        });
 
-        camera.start();
+            camera.start();
+        } else {
+
+            filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
+            opts.output = filename;
+            timerStart = opts.timerStart || 0;
+            delete opts.timerStart;
+            camera = new RaspiCam(opts);
+
+            camera.on("exit", function () {
+                console.log('time-lapse done', moment().format());
+            });
+
+            timeoutId = setTimeout(function () {
+                camera.start();
+            }, timerStart);
+
+            res.json({
+                data: 'done'
+            });
+        }
 
     } else {
-
-        filename = baseFilename + '/' + moment().format('HH-mm-ss') + '-%04d' + fileExtension;
-        opts.output = filename;
-        timerStart = opts.timerStart || 0;
-        delete opts.timerStart;
-        camera = new RaspiCam(opts);
-
-        camera.on("exit", function () {
-            console.log('time-lapse done', moment().format());
-        });
-
-        setTimeout(function () {
-            camera.start();
-        }, timerStart);
+        console.log('ERROR - camera already exists');
 
         res.json({
-            data: 'done'
+            error: 'camera already exists'
         });
     }
 });
 
 app.get('/killtimer', function (req, res) {
     console.log('killtimer called', moment().format());
+
     var didStop = camera.stop();
     console.log('did stop', didStop);
-    res.send('Timer killed', 200);
+
+    if (timeoutId) {
+        console.log('clearing timeout', timeoutId);
+        clearTimeout(timeoutId);
+        res.json({
+            data: 'Timer stopped'
+        });
+    } else if (didStop) {
+        res.json({
+            data: 'Camera stopped'
+        });
+    } else {
+        res.json({
+            error: 'Camera not running'
+        });
+    }
 });
 
 app.get('*', function (req, res) {

@@ -14346,7 +14346,7 @@ define('config',[],function () {
     return {
         DEFAULT_IMAGE_DIMENSIONS: defaultImageDimensions,
         BERRYCAM_URL: '/berrycam',
-        KILL_TIMERS_URL: '/killtimers'
+        KILL_TIMER_URL: '/killtimer'
     };
 
 });
@@ -16881,10 +16881,15 @@ define('services/dataservice-camera',['jquery', 'payload-builder', 'config'], fu
             url: config.BERRYCAM_URL,
             data: $.param(builder.buildPayload())
         });
+    }, killTimer = function () {
+        return $.ajax({
+            url: config.KILL_TIMER_URL
+        });
     };
 
     return {
-        shutterPress: shutterPress
+        shutterPress: shutterPress,
+        killTimer: killTimer
     };
 
 });
@@ -16908,6 +16913,9 @@ define('services/datacontext',['./dataservice'], function (dataservice) {
             return dataservice.camera.shutterPress().done(function (results) {
                 return results;
             });
+        },
+        killTimer: function () {
+            return dataservice.camera.killTimer();
         }
     };
 
@@ -17030,6 +17038,10 @@ define('viewmodel',['knockout',
             return currentImageFilename() ? currentImageFilename().split('/').pop() : '';
         }),
 
+        isMakingAjaxRequest = ko.observable(false),
+
+        isTimelapseJobRunning = ko.observable(false),
+
         toggleIimeLapseMode = function () {
             var current = data.timeLapseMode.selectedValue(),
                 newVal;
@@ -17040,8 +17052,6 @@ define('viewmodel',['knockout',
             }
             data.timeLapseMode.selectedValue(newVal);
         },
-
-        isMakingAjaxRequest = ko.observable(false),
 
         resetCameraSettings = function () {
             datamodel.reset();
@@ -17068,6 +17078,9 @@ define('viewmodel',['knockout',
             isMakingAjaxRequest(true);
 
             ctx.camera.shutterPress().done(function (results) {
+                if (results.error) {
+                    errorHandler.handleError('creating image failed', results.error);
+                }
                 loadImage(results.filename);
             }).fail(function () {
                 $image.fadeTo('fast', 1.0);
@@ -17079,9 +17092,13 @@ define('viewmodel',['knockout',
         startTimelapse = function () {
 
             isMakingAjaxRequest(true);
+            isTimelapseJobRunning(true);
 
-            ctx.camera.shutterPress().done(function () {
+            ctx.camera.shutterPress().done(function (results) {
                 //TODO - notify user that time-lapse job is queued
+                if (results.error) {
+                    errorHandler.handleError('starting time-lapse failed', results.error);
+                }
             }).fail(function () {
                 errorHandler.handleError('starting time-lapse failed');
             }).always(function () {
@@ -17101,6 +17118,15 @@ define('viewmodel',['knockout',
                     $image.fadeTo('fast', 1.0);
                 });
             }
+        },
+
+        killTimer = function () {
+            ctx.camera.killTimer().done(function (results) {
+                isTimelapseJobRunning(false);
+                if (results.error) {
+                    errorHandler.handleError('stopping timer failed', results.error);
+                }
+            });
         };
 
     return {
@@ -17128,7 +17154,9 @@ define('viewmodel',['knockout',
         currentImageFilenameFormatted: currentImageFilenameFormatted,
         isMakingAjaxRequest: isMakingAjaxRequest,
         resetCameraSettings: resetCameraSettings,
-        isTimelapseEnabled: true
+        isTimelapseEnabled: true,
+        isTimelapseJobRunning: isTimelapseJobRunning,
+        killTimer: killTimer
     };
 
 });
@@ -19988,7 +20016,7 @@ require.config({
     }
 });
 
-define('730587ab.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
+define('b3f41815.main',['jquery', 'knockout', 'viewmodel', 'bootstrap', 'bindings/bindings'], function ($, ko, viewmodel) {
 
     
 
