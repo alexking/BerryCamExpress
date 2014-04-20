@@ -100,6 +100,7 @@
         <div class="clearer"></div>
 
         <!-- Timelapse Control Area -->
+        <!-- ko if: !isTimelapseJobRunning() -->
         <div class="timelapse-settings" data-bind="visible: showCaptureIntervals">
             <br><br>
             <div class="clearer"></div>
@@ -210,6 +211,13 @@
             </div>
 
         </div>
+        <!-- /ko -->
+
+        <!-- ko if: isTimelapseJobRunning() -->
+        <div>
+            <button type="button" class="btn btn-default" data-bind="click: killTimer">Cancel running time-lapse job</button>
+        </div>
+        <!-- /ko -->
 
         <div class="clearer"></div>
 
@@ -325,13 +333,6 @@
 
                     <br><br>
                     <button class="btn btn-default" data-bind="click: resetCameraSettings">Reset default camera settings</button>
-
-                    <!-- ko if: isTimelapseEnabled -->
-
-                    <!--<br><br>-->
-                    <!--<button type="button" class="btn btn-default" data-bind="click: killTimers">Kill timers</button>-->
-
-                    <!-- /ko -->
 
                     <div class="clearer"></div>
                 </div>

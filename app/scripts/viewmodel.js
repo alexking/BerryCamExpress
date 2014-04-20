@@ -97,6 +97,10 @@ define(['knockout',
             return currentImageFilename() ? currentImageFilename().split('/').pop() : '';
         }),
 
+        isMakingAjaxRequest = ko.observable(false),
+
+        isTimelapseJobRunning = ko.observable(false),
+
         toggleIimeLapseMode = function () {
             var current = data.timeLapseMode.selectedValue(),
                 newVal;
@@ -107,8 +111,6 @@ define(['knockout',
             }
             data.timeLapseMode.selectedValue(newVal);
         },
-
-        isMakingAjaxRequest = ko.observable(false),
 
         resetCameraSettings = function () {
             datamodel.reset();
@@ -146,6 +148,7 @@ define(['knockout',
         startTimelapse = function () {
 
             isMakingAjaxRequest(true);
+            isTimelapseJobRunning(true);
 
             ctx.camera.shutterPress().done(function () {
                 //TODO - notify user that time-lapse job is queued
@@ -168,6 +171,13 @@ define(['knockout',
                     $image.fadeTo('fast', 1.0);
                 });
             }
+        },
+
+        killTimer = function () {
+            ctx.camera.killTimer().done(function () {
+                console.log('Timer killed');
+                isTimelapseJobRunning(false);
+            });
         };
 
     return {
@@ -195,7 +205,9 @@ define(['knockout',
         currentImageFilenameFormatted: currentImageFilenameFormatted,
         isMakingAjaxRequest: isMakingAjaxRequest,
         resetCameraSettings: resetCameraSettings,
-        isTimelapseEnabled: true
+        isTimelapseEnabled: true,
+        isTimelapseJobRunning: isTimelapseJobRunning,
+        killTimer: killTimer
     };
 
 });

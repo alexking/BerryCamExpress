@@ -8,7 +8,8 @@ var express = require('express'),
     baseFilename = 'berrycamimages/session_' + today,
     baseImageDirectory = __dirname + '/' + baseFilename,
     backupPath = baseImageDirectory + '_backup_' + moment().format('HHmmss'),
-    fileExtension = '.jpg';
+    fileExtension = '.jpg',
+    camera;
 
 app.configure(function () {
     app.use(express.compress());
@@ -35,7 +36,6 @@ app.get('/berrycam', function (req, res) {
     var opts = req.query,
         filename,
         sequenceNumber,
-        camera,
         mode = opts.mode,
         timerStart;
 
@@ -80,6 +80,13 @@ app.get('/berrycam', function (req, res) {
             data: 'done'
         });
     }
+});
+
+app.get('/killtimer', function (req, res) {
+    console.log('killtimer called', moment().format());
+    var didStop = camera.stop();
+    console.log('did stop', didStop);
+    res.send('Timer killed', 200);
 });
 
 app.get('*', function (req, res) {

@@ -7,6 +7,9 @@ define(['./dataservice'], function (dataservice) {
             return dataservice.camera.shutterPress().done(function (results) {
                 return results;
             });
+        },
+        killTimer: function () {
+            return dataservice.camera.killTimer();
         }
     };
 

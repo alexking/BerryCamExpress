@@ -7,10 +7,15 @@ define(['jquery', 'payload-builder', 'config'], function ($, builder, config) {
             url: config.BERRYCAM_URL,
             data: $.param(builder.buildPayload())
         });
+    }, killTimer = function () {
+        return $.ajax({
+            url: config.KILL_TIMER_URL
+        });
     };
 
     return {
-        shutterPress: shutterPress
+        shutterPress: shutterPress,
+        killTimer: killTimer
     };
 
 });

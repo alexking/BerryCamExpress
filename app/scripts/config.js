@@ -10,7 +10,7 @@ define(function () {
     return {
         DEFAULT_IMAGE_DIMENSIONS: defaultImageDimensions,
         BERRYCAM_URL: '/berrycam',
-        KILL_TIMERS_URL: '/killtimers'
+        KILL_TIMER_URL: '/killtimer'
     };
 
 });
