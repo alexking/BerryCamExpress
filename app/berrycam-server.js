@@ -92,10 +92,9 @@ app.get('/killtimer', function (req, res) {
     if (timeoutId) {
         console.log('clearing timeout', timeoutId);
         clearTimeout(timeoutId);
-        res.json({
-            data: 'Timer stopped'
-        });
-    } else if (didStop) {
+    }
+
+    if (didStop) {
         res.json({
             data: 'Camera stopped'
         });
