@@ -177,6 +177,14 @@ define(['viewmodel',
                             sinon.assert.called(loadStub);
                         });
 
+                        it('should call error handler if error returned', function () {
+                            testee.doShutterPress();
+                            def.resolve({
+                                error: 'some error'
+                            });
+                            sinon.assert.called(errorHandlerStub);
+                        });
+
                         it('should handle done - bad data', function () {
                             testee.doShutterPress();
                             def.resolve({});
@@ -203,6 +211,14 @@ define(['viewmodel',
                         datamodel.data.mode.selectedValue('Timelapse');
                     });
 
+                    it('should call error handler if error returned', function () {
+                        testee.doShutterPress();
+                        def.resolve({
+                            error: 'some error'
+                        });
+                        sinon.assert.called(errorHandlerStub);
+                    });
+
                     it('should handle fail', function () {
                         testee.doShutterPress();
                         def.reject();
@@ -216,6 +232,49 @@ define(['viewmodel',
                         expect(testee.isMakingAjaxRequest()).toBe(false);
                     });
 
+                });
+
+            });
+
+            describe('kill timer', function () {
+
+                var def, ctxStub, errorHandlerStub;
+
+                beforeEach(function () {
+                    def = $.Deferred();
+                    ctxStub = sinon.stub(ctx.camera, 'killTimer').returns(def.promise());
+                    errorHandlerStub = sinon.stub(errorHandler, 'handleError');
+                });
+
+                afterEach(function () {
+                    ctxStub.restore();
+                    errorHandlerStub.restore();
+                });
+
+                it('should call context camera killTimer function', function () {
+                    testee.killTimer();
+                    def.resolve({
+                        error: null
+                    });
+                    sinon.assert.called(ctxStub);
+                });
+
+                it('should set isTimelapseJobRunning false', function () {
+                    testee.isTimelapseJobRunning(true);
+                    testee.killTimer();
+                    def.resolve({
+                        error: null
+                    });
+                    expect(testee.isTimelapseJobRunning()).toBe(false);
+                });
+
+                it('should call error handler if error returned', function () {
+                    testee.isTimelapseJobRunning(true);
+                    testee.killTimer();
+                    def.resolve({
+                        error: 'some error'
+                    });
+                    sinon.assert.called(errorHandlerStub);
                 });
 
             });
