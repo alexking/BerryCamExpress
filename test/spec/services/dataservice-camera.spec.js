@@ -26,6 +26,16 @@ define(['services/dataservice-camera', 'jquery'], function (testee, $) {
 
         });
 
+        describe('killTimer', function () {
+
+            it('should call ajax', function () {
+                testee.killTimer();
+                def.resolve();
+                sinon.assert.called(ajaxStub);
+            });
+
+        });
+
     });
 
 });

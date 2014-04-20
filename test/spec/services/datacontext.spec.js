@@ -7,7 +7,8 @@ define(['SquireWrapper', 'jquery'], function (SquireWrapper) {
         injector = new SquireWrapper(),
         stubs = {
             'services/dataservice-camera': {
-                shutterPress: sinon.stub().returns(def.promise())
+                shutterPress: sinon.stub().returns(def.promise()),
+                killTimer: sinon.stub().returns(def.promise())
             }
         };
 
@@ -15,8 +16,8 @@ define(['SquireWrapper', 'jquery'], function (SquireWrapper) {
 
         beforeEach(function () {
             if (!testee) {
-                injector.mock(stubs).require(['services/datacontext'], function (dsCamera) {
-                    testee = dsCamera;
+                injector.mock(stubs).require(['services/datacontext'], function (datacontext) {
+                    testee = datacontext;
                     def.resolve();
                 });
             }
@@ -39,6 +40,21 @@ define(['SquireWrapper', 'jquery'], function (SquireWrapper) {
 
             it('should call dataservice camera shutterPress', function () {
                 testee.camera.shutterPress();
+                sinon.assert.called(dsStub);
+            });
+
+        });
+
+        describe('camera killTimer', function () {
+
+            var dsStub;
+
+            beforeEach(function () {
+                dsStub = stubs['services/dataservice-camera'].killTimer;
+            });
+
+            it('should call dataservice camera killTimer', function () {
+                testee.camera.killTimer();
                 sinon.assert.called(dsStub);
             });
 
