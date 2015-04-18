@@ -39,8 +39,8 @@ which should reveal the version number `1.2.15` or the version that you have ins
 We need to install bower and grunt globally.  Run commands
 
 ```
-npm install -g bower 
-npm install -g grunt-cli 
+sudo npm install -g bower 
+sudo npm install -g grunt-cli 
 ```
 
 See: 
