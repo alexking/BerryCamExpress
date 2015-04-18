@@ -50,7 +50,6 @@
     "grunt-template-jasmine-istanbul": "0.2.6",
     "grunt-string-replace": "0.2.7",
     "grunt-npm-install": "~0.1.0",
-    "grunt-styleguide": "~0.2.14",
     "grunt-connect-rewrite": "~0.2.1",
     "grunt-contrib-compress": "~0.6.1"
   }

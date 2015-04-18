@@ -67,12 +67,12 @@ define(['model/datamodel', 'model/CameraSettings', 'model/CaptureInterval' ], fu
 
                 testee.reset();
 
-                check(data.awb, 'Off');
+                check(data.awb, 'Auto');
                 check(data.mm, 'Matrix');
                 check(data.ev, '0 ');
-                check(data.ex, 'Off');
+                check(data.ex, 'Auto');
                 check(data.sh, 11);
-                check(data.br, 50);
+                check(data.br, 60);
                 check(data.co, 2);
                 check(data.sa, 4);
                 check(data.ISO, '100');
