@@ -3,12 +3,12 @@ define(['./model', 'jquery'], function (model, $) {
     'use strict';
 
     var data = {
-        awb: new model.CameraSettings('WB', ['Off', 'Auto', 'Sun', 'Cloud', 'Shade', 'Tungsten', 'Fluorescent', 'Incandescent', 'Flash', 'Horizon']),
+        awb: new model.CameraSettings('WB', ['Off', 'Auto', 'Sun', 'Cloud', 'Shade', 'Tungsten', 'Fluorescent', 'Incandescent', 'Flash', 'Horizon'], 'Auto'),
         mm: new model.CameraSettings('Metering', ['Matrix', 'Average', 'Spot', 'Backlit']),
         ev: new model.CameraSettings('EV', ['0 ', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', ' 0', '-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '-9', '-10'], '0 ', ' +/-'),
-        ex: new model.CameraSettings('Exposure', ['Off', 'Auto', 'Night', 'Backlight', 'Spotlight', 'Sports', 'Snow', 'Beach', 'Verylong', 'Fireworks']),
+        ex: new model.CameraSettings('Exposure', ['Auto', 'Night', 'Backlight', 'Spotlight', 'Sports', 'Snow', 'Beach', 'Verylong', 'Fireworks'], 'Auto'),
         sh: new model.CameraSettings('Sharpness', [], 11, -100),
-        br: new model.CameraSettings('Brightness', [], 50),
+        br: new model.CameraSettings('Brightness', [], 60),
         co: new model.CameraSettings('Contrast', [], 2, -100),
         sa: new model.CameraSettings('Saturation', [], 4, -100),
         ISO: new model.CameraSettings('ISO', ['100', '200', '400']),
