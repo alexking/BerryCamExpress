@@ -10,8 +10,8 @@ require.config({
     },
     map: {
         '*': {
-            'knockout': '../bower_components/knockout.js/knockout.debug',
-            'ko': '../bower_components/knockout.js/knockout.debug'
+            'knockout': '../bower_components/knockout/dist/knockout.debug',
+            'ko': '../bower_components/knockout/dist/knockout.debug'
         }
     },
     shim: {
