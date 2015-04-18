@@ -67,6 +67,8 @@ cd BerryCamExpress
 npm install
 bower install
 grunt
+or 
+grunt --force (if you get errors when running the unit tests) 
 ```
 
 After a few minutes, the package will install additional dependencies that allow it to run, then build itself.
