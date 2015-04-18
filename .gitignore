@@ -7,3 +7,5 @@ app/berrycamimages/
 app/berrycamimages~
 app/bower_components/
 node_modules/
+
+dist

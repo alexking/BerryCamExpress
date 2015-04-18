@@ -34,6 +34,19 @@ npm -v
 which should reveal the version number `1.2.15` or the version that you have installed.
 
 
+### Install bower and grunt
+
+We need to install bower and grunt globally.  Run commands
+
+```
+npm install -g bower 
+npm install -g grunt-cli 
+```
+
+See: 
+http://gruntjs.com/getting-started 
+http://bower.io/#install-bower
+
 ### Clone the BerryCam Express project onto your Raspberry Pi
 
 We need to pull all the code that runs BerryCam Express down into your user directory (or the location of your choosing). To clone within the `/home/pi` directory:
@@ -47,14 +60,17 @@ git clone https://github.com/pitography/BerryCamExpress.git
 
 This command installs a package, and any packages that it depends on. Although this take quite some time given the amount of processing power initially required, it makes it easy to fetch all the required components and libraries.
 
-We re-issue the command:
+We issue the commands:
 
 ```
 cd BerryCamExpress
 npm install
+bower install
+grunt
 ```
 
-After a few minutes, the package will install additional dependencies that allow it to run.
+After a few minutes, the package will install additional dependencies that allow it to run, then build itself.
+
 
 ### Start the server
 
