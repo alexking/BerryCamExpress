@@ -8,7 +8,13 @@ var express = require('express'),
     baseFilename = 'berrycamimages/session_' + today,
     baseImageDirectory = __dirname + '/' + baseFilename,
     backupPath = baseImageDirectory + '_backup_' + moment().format('HHmmss'),
-    fileExtension = '.jpg';
+    fileExtension = '.jpg',
+    allowCrossDomain = function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+        next();
+    };
 
 app.configure(function () {
     app.use(express.compress());
@@ -16,6 +22,7 @@ app.configure(function () {
     app.use('/berrycamimages', express.directory('berrycamimages'));
     app.use(express.cookieParser());
     app.use(express.session({secret: 'macyrreb999'}));
+    app.use(allowCrossDomain);
 
     if (fs.existsSync(baseImageDirectory)) {
         fs.renameSync(baseImageDirectory, backupPath);
