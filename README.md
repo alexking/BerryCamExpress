@@ -1,7 +1,7 @@
 BerryCam Express
 ================
 
-##Note - if you are using Jessie - see https://github.com/pitography/BerryCamExpress/issues/7#event-500810670
+##Note - if you are using Jessie - see https://github.com/pitography/BerryCamExpress/issues/7
 
 First of all make sure that you have the latest version of raspbian running on your Raspberry Pi:
 
