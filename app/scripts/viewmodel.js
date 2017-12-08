@@ -139,7 +139,7 @@ define(['knockout',
                 currentImageFilename('');
                 errorHandler.handleError('loading image failed');
             } else {
-                $image.attr('src', filename).load(function () {
+                $image.attr('src', filename).on("load", function () {
                     currentImageFilename(filename);
                     isMakingAjaxRequest(false);
                     $image.fadeTo('fast', 1.0);
